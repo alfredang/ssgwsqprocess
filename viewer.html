@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Viewer — SSG WSQ Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="viewer-page">
+
+  <!-- Navbar -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="navbar-brand">
+      <div class="logo-icon">W</div>
+      <span>WSQ Guide</span>
+    </a>
+    <div class="navbar-links">
+      <a href="index.html">Home</a>
+      <a href="steps.html">Process Steps</a>
+    </div>
+  </nav>
+
+  <!-- Viewer Toolbar -->
+  <div class="viewer-toolbar">
+    <div class="viewer-toolbar-left">
+      <button class="btn-icon" id="btn-back" title="Back to steps" aria-label="Back to steps">&larr;</button>
+      <div>
+        <div class="viewer-toolbar-title" id="viewer-title">Loading...</div>
+        <div class="viewer-toolbar-step" id="viewer-step-label"></div>
+      </div>
+    </div>
+    <div class="viewer-toolbar-right">
+      <div class="nav-buttons">
+        <button class="nav-btn" id="btn-prev" disabled aria-label="Previous step">&larr; Prev</button>
+        <button class="nav-btn" id="btn-next" disabled aria-label="Next step">Next &rarr;</button>
+      </div>
+      <button class="btn-icon" id="btn-open-tab" title="Open in new tab" aria-label="Open in new tab">&#x2197;</button>
+    </div>
+  </div>
+
+  <!-- Viewer Content -->
+  <div class="viewer-content" id="viewer-content">
+    <div class="loading-overlay"><div class="spinner"></div></div>
+  </div>
+
+  <footer class="footer">
+    SSG WSQ Process Guide &mdash; Powered by <a href="https://www.tertiarycourses.com.sg" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;">Tertiary Infotech Academy Pte Ltd</a>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/viewer.js"></script>
+</body>
+</html>
