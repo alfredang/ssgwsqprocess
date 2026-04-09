@@ -139,4 +139,18 @@ function getLastStep() {
   }
 }
 
+/**
+ * Convert a step title to a URL-friendly slug
+ */
+function slugifyStep(title) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+/**
+ * Find a step by its URL slug
+ */
+function findStepBySlug(slug) {
+  return WSQ_STEPS.find(s => slugifyStep(s.title) === slug) || null;
+}
+
 document.addEventListener('DOMContentLoaded', initNavbar);

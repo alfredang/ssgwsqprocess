@@ -62,6 +62,7 @@
 
     activeStepId = id;
     saveLastStep(id);
+    history.replaceState(null, '', '#' + slugifyStep(step.title));
     renderList(searchInput.value);
 
     // Update toolbar
@@ -91,6 +92,7 @@
   /* ---- Close the viewer ---- */
   function closeViewer() {
     activeStepId = null;
+    history.replaceState(null, '', window.location.pathname + window.location.search);
     renderList(searchInput.value);
     viewerTitle.textContent = '';
     viewerStepLabel.textContent = '';
@@ -148,12 +150,29 @@
     if (e.key === 'ArrowDown' && activeStepId) { e.preventDefault(); goToNext(); }
   });
 
+  /* ---- Handle browser back/forward ---- */
+  window.addEventListener('hashchange', () => {
+    const slug = window.location.hash.slice(1);
+    if (slug) {
+      const step = findStepBySlug(slug);
+      if (step && step.id !== activeStepId) openStep(step.id);
+    } else {
+      if (activeStepId) closeViewer();
+    }
+  });
+
   /* ---- Init ---- */
   renderList();
 
-  // Restore last step if available
-  const last = getLastStep();
-  if (last && WSQ_STEPS.find(s => s.id === last)) {
-    openStep(last);
+  // Open step from URL hash, or fall back to last viewed step
+  const hash = window.location.hash.slice(1);
+  const hashStep = hash ? findStepBySlug(hash) : null;
+  if (hashStep) {
+    openStep(hashStep.id);
+  } else {
+    const last = getLastStep();
+    if (last && WSQ_STEPS.find(s => s.id === last)) {
+      openStep(last);
+    }
   }
 })();
